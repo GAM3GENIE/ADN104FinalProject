@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ADN104FinalProjectWozU.Models.Post
+
+@{
+    ViewData["Title"] = "Create A Post Responsibly";
+}
+<h1>Create Post</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Post" asp-action="CreatePost">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" maxlength="25" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <br />
+                <textarea asp-for="Content" class="content-area" placeholder="Your posts go here">
+                </textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Post" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

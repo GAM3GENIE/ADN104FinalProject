@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<ADN104FinalProjectWozU.Models.Post>
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Display Posts";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="text-center">
+        <a asp-controller="Post" asp-action="CreatePost">Click Here to Create a Post</a>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <p>Sign In And Post Something</p>
+    </div>
+}
+<div class="posts">
+    <div class="post-container">
+        @foreach (var post in Model)
+        {
+            <div class="posts">
+                <div class="post-title">@post.Title</div>
+                <div class="post-content">@post.Content</div>
+                <div class="post-info">Created By: @post.CreatedBy</div>
+                <div class="post-info">Date Created: @post.TimeStamp</div>
+                @if (User.Identity.Name == post.CreatedBy)
+                {
+                    <div class="post-buttons">
+                        <a asp-controller="Post" asp-action="EditPost" asp-route-id="@post.Id"
+                    style="margin-right: 5px">Edit</a>
+                        <a asp-controller="Post" asp-action="DeletePost" asp-route-id="@post.Id">Delete</a>
+                    </div>
+                }
+            </div>
+            <br />
+        }
+    </div>
+</div>
